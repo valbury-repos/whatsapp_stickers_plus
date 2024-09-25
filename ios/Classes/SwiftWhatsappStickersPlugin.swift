@@ -50,6 +50,7 @@ public class SwiftWhatsappStickersPlugin: NSObject, FlutterPlugin {
         let publisherWebsite = arguments["publisherWebsite"] as? String
         let privacyPolicyWebsite = arguments["privacyPolicyWebsite"] as? String
         let licenseAgreementWebsite = arguments["licenseAgreementWebsite"] as? String
+        let animatedStickerPack = arguments["animatedStickerPack"] as? Bool ?? false
         
         var stickerPack: StickerPack?
         
@@ -58,6 +59,7 @@ public class SwiftWhatsappStickersPlugin: NSObject, FlutterPlugin {
                                           name: name,
                                           publisher: publisher,
                                           trayImageFileName: locateFile(atPath: trayImageFileName),
+                                          animatedStickerPack: animatedStickerPack,
                                           publisherWebsite: publisherWebsite,
                                           privacyPolicyWebsite: privacyPolicyWebsite,
                                           licenseAgreementWebsite: licenseAgreementWebsite)
