@@ -60,11 +60,13 @@ class StickerPackManager {
                 var packPublisherWebsite: String? = pack["publisher_website"] as? String
                 var packPrivacyPolicyWebsite: String? = pack["privacy_policy_website"] as? String
                 var packLicenseAgreementWebsite: String? = pack["license_agreement_website"] as? String
+                var packAnimatedStickerPack: Bool = pack["animated_sticker_pack"] as? Bool ?? false
+                
                 // If the strings are empty, consider them as nil
                 packPublisherWebsite = packPublisherWebsite != "" ? packPublisherWebsite : nil
                 packPrivacyPolicyWebsite = packPrivacyPolicyWebsite != "" ? packPrivacyPolicyWebsite : nil
                 packLicenseAgreementWebsite = packLicenseAgreementWebsite != "" ? packLicenseAgreementWebsite : nil
-
+                
                 // Pack identifier has to be a valid string and be unique
                 let packIdentifier: String? = pack["identifier"] as? String
                 if packIdentifier != nil && currentIdentifiers[packIdentifier!] == nil {
@@ -80,7 +82,7 @@ class StickerPackManager {
                 var stickerPack: StickerPack?
 
                 do {
-                   stickerPack = try StickerPack(identifier: packIdentifier!, name: packName, publisher: packPublisher, trayImageFileName: packTrayImageFileName, publisherWebsite: packPublisherWebsite, privacyPolicyWebsite: packPrivacyPolicyWebsite, licenseAgreementWebsite: packLicenseAgreementWebsite)
+                   stickerPack = try StickerPack(identifier: packIdentifier!, name: packName, publisher: packPublisher, trayImageFileName: packTrayImageFileName, animatedStickerPack: packAnimatedStickerPack, publisherWebsite: packPublisherWebsite, privacyPolicyWebsite: packPrivacyPolicyWebsite, licenseAgreementWebsite: packLicenseAgreementWebsite)
                 } catch StickerPackError.fileNotFound {
                     fatalError("\(packTrayImageFileName) not found.")
                 } catch StickerPackError.emptyString {
