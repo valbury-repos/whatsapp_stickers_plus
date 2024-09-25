@@ -46,11 +46,14 @@ public class SwiftWhatsappStickersPlugin: NSObject, FlutterPlugin {
             result(FlutterError(code: "INVALID_STICKERS", message: "Invalid stickers", details: nil))
             return
         }
+        guard let animatedStickerPack = arguments["animatedStickerPack"] as? Bool else {
+			result(FlutterError(code: "INVALID_STICKER_PACK_TYPE", message: "Invalid sticker pack type", details: nil))
+			return
+		}
         
         let publisherWebsite = arguments["publisherWebsite"] as? String
         let privacyPolicyWebsite = arguments["privacyPolicyWebsite"] as? String
         let licenseAgreementWebsite = arguments["licenseAgreementWebsite"] as? String
-        let animatedStickerPack = arguments["animatedStickerPack"] as? Bool ?? false
         
         var stickerPack: StickerPack?
         
